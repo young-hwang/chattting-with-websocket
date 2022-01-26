@@ -1,63 +1,79 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
+  <head>
+    <meta charset="UTF-8" />
     <title>Chatting</title>
-    <link rel="stylesheet" href="/webjars/bootstrap/5.1.3/css/bootstrap.min.css">
-    <link rel="script" href="/webjars/bootstrap/5.1.3/js/bootstrap.min.js">
-</head>
-<body>
-    <input type="text" id="nickname" placeholder="닉네임을 입력하세요."/>
+    <link
+      type="text/css"
+      rel="stylesheet"
+      href="/webjars/bootstrap/5.1.3/css/bootstrap.min.css"
+    />
+    <script src="/webjars/bootstrap/5.1.3/js/bootstrap.min.js" />
+  </head>
+  <body>
+    <input type="text" id="nickname" placeholder="닉네임을 입력하세요." />
     <button id="name" class="btn btn-primary">확인</button>
-    <div id = "chatroom" style = "width:400px; height: 600px; border:1px solid; background-color : gray"></div>
-    <input type = "text" id = "message" style = "height : 30px; width : 340px" placeholder="내용을 입력하세요" autofocus>
-    <button class = "btn btn-primary" id = "send">전송</button>
-</body>
-<script>
-    var webSocket;
-    var nickname;
+    <div
+      id="chatroom"
+      style="
+        width: 400px;
+        height: 600px;
+        border: 1px solid;
+        background-color: gray;
+      "
+    ></div>
+    <input
+      type="text"
+      id="message"
+      style="height: 30px; width: 340px"
+      placeholder="내용을 입력하세요"
+      autofocus
+    />
+    <button class="btn btn-primary" id="send">전송</button>
+  </body>
+  <script>
+    var webSocket
+    var nickname
 
-    document.getElementById("name").addEventListener("click", function() {
-        nickname = document.getElementById("nickname").value;
-        document.getElementById("nickname").style.display="none";
-        document.getElementById("name").style.display="none";
-        connect();
-    });
+    document.getElementById('name').addEventListener('click', function () {
+      nickname = document.getElementById('nickname').value
+      document.getElementById('nickname').style.display = 'none'
+      document.getElementById('name').style.display = 'none'
+      connect()
+    })
 
-    document.getElementById("send").addEventListener("click", function() {
-        send();
-    });
+    document.getElementById('send').addEventListener('click', function () {
+      send()
+    })
 
     function connect() {
-        webSocket = new WebSocket("ws://localhost:8080/chat");
-        webSocket.onopen = onOpen;
-        webSocket.onclose = onClose;
-        webSocket.onmessage = onMessage;
+      webSocket = new WebSocket('ws://localhost:8080/chat')
+      webSocket.onopen = onOpen
+      webSocket.onclose = onClose
+      webSocket.onmessage = onMessage
     }
 
     function disconnect() {
-        webSocket.send(nickname + "님이 퇴장하셨습니다");
-        webSocket.close();
+      webSocket.send(nickname + '님이 퇴장하셨습니다')
+      webSocket.close()
     }
 
     function send() {
-        msg = document.getElementById("message").value;
-        webSocket.send(nickname + " : " + msg);
-        document.getElementById("message").value = "";
+      msg = document.getElementById('message').value
+      webSocket.send(nickname + ' : ' + msg)
+      document.getElementById('message').value = ''
     }
 
     function onOpen() {
-        webSocket.send(nickname + "님이 입장하셨습니다");
+      webSocket.send(nickname + '님이 입장하셨습니다')
     }
 
     function onMessage(e) {
-        data = e.data;
-        chatroom = document.getElementById("chatroom");
-        chatroom.innerHTML = chatroom.innerHTML + "<br>" + data;
+      data = e.data
+      chatroom = document.getElementById('chatroom')
+      chatroom.innerHTML = chatroom.innerHTML + '<br>' + data
     }
 
-    function onClose() {
-    }
-
-</script>
+    function onClose() {}
+  </script>
 </html>

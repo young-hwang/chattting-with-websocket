@@ -1,10 +1,13 @@
 package io.ggammu.chattingwithwebsocket.chat;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
+import javax.annotation.PostConstruct;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Repository;
-
-import javax.annotation.PostConstruct;
-import java.util.*;
 
 @Slf4j
 @Repository
@@ -19,6 +22,7 @@ public class ChatRoomRepository {
     }
 
     public List<ChatRoom> findAllRoom() {
+        log.info("findAllRoom");
         List chatRooms = new ArrayList(chatRoomMap.values());
         Collections.reverse(chatRooms);
         return chatRooms;
@@ -29,7 +33,7 @@ public class ChatRoomRepository {
     }
 
     public ChatRoom createChatRoom(String name) {
-        ChatRoom chatRoom = ChatRoom.builder().name(name).build();
+        ChatRoom chatRoom = new ChatRoom(name);
         return chatRoom;
     }
 

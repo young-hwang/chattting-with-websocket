@@ -2,15 +2,12 @@ package io.ggammu.chattingwithwebsocket.chat;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.ggammu.chattingwithwebsocket.dto.ChatMessage;
-import lombok.Builder;
-import org.springframework.web.socket.TextMessage;
-import org.springframework.web.socket.WebSocketSession;
-
 import java.io.IOException;
 import java.util.HashSet;
-import java.util.Optional;
 import java.util.Set;
 import java.util.UUID;
+import org.springframework.web.socket.TextMessage;
+import org.springframework.web.socket.WebSocketSession;
 
 public class ChatRoom {
 
@@ -18,7 +15,6 @@ public class ChatRoom {
     private String name;
     private Set<WebSocketSession> sessions = new HashSet<>();
 
-    @Builder
     public ChatRoom(String name) {
         this.roomId = UUID.randomUUID().toString();
         this.name = name;

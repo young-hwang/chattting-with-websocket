@@ -36,6 +36,7 @@ public class WebSocketHandler extends TextWebSocketHandler {
     @Override
     protected void handleTextMessage(WebSocketSession session, TextMessage message) throws Exception {
         log.info("transfer message : {} : {}", session, message.getPayload());
+        log.info("session class : {}", session.getClass().toString());
 
         String msg = message.getPayload();
         ChatMessage chatMessage = objectMapper.convertValue(msg, ChatMessage.class);

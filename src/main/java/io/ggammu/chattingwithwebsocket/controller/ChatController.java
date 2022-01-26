@@ -6,6 +6,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.servlet.ModelAndView;
 
 @Slf4j
 @RequiredArgsConstructor
@@ -23,6 +25,12 @@ public class ChatController {
     public String chat(Model model) {
         model.addAttribute("rooms", repository.findAllRoom());
         return "rooms";
+    }
+
+    @GetMapping("/rooms/{id}")
+    public String room(@PathVariable String id, Model model) {
+
+        return "room";
     }
 
 }
