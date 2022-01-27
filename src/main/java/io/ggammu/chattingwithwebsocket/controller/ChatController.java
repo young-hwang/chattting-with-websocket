@@ -1,5 +1,6 @@
 package io.ggammu.chattingwithwebsocket.controller;
 
+import io.ggammu.chattingwithwebsocket.chat.ChatRoom;
 import io.ggammu.chattingwithwebsocket.chat.ChatRoomRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -29,8 +30,14 @@ public class ChatController {
 
     @GetMapping("/rooms/{id}")
     public String room(@PathVariable String id, Model model) {
-
+        ChatRoom room = repository.findRoomById(id);
+        model.addAttribute("room", room);
         return "room";
+    }
+
+    @GetMapping("/new")
+    public String make(Model model) {
+        new ChatRoomForm();
     }
 
 }
