@@ -8,7 +8,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.servlet.ModelAndView;
 
 @Slf4j
 @RequiredArgsConstructor
@@ -37,7 +36,9 @@ public class ChatController {
 
     @GetMapping("/new")
     public String make(Model model) {
-        new ChatRoomForm();
+        ChatRoomForm chatRoomForm = new ChatRoomForm();
+        model.addAttribute("chatRoomForm", chatRoomForm);
+        return "newRoom";
     }
 
 }
